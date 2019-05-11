@@ -11,7 +11,7 @@ class Flammy(Entity):
         self.game = game
 
         self.o2 = 300
-        self.o2timer = 10
+        self.o2timer = 8
 
         self.add_component(PositionComponent([100, 100]))
         self.add_component(SpriteComponent("Images/Flammy/Flammy.png"))
@@ -45,5 +45,5 @@ class Flammy(Entity):
             self.o2 -= 1
             self.game.lifeo2front.set_size([32, self.o2])
             self.game.lifeo2front.set_position([608, 100+(300-self.o2)])
-            self.o2timer = 10
+            self.o2timer = 8
         self.o2timer -= 1
