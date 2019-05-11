@@ -1,5 +1,6 @@
 from pyengine import GameState
-from pyengine.Systems import EntitySystem
+from pyengine.Systems import EntitySystem, UISystem
+from pyengine.Widgets import Image
 
 from Core.Characters.Flammy import Flammy
 from Core.Characters.Goutte import Goutte
@@ -11,18 +12,30 @@ class Game(GameState):
     def __init__(self):
         super(Game, self).__init__("Jeu")
 
-        self.flammy = Flammy()
+        self.entitysystem = self.world.get_system(EntitySystem)
+        self.uisystem = self.world.get_system(UISystem)
+
+        self.flammy = Flammy(self)
         self.walls = [Wall(0), Wall(1), Wall(2), Wall(3)]
         self.ennemies = [Goutte(self)]
         self.ground = Ground()
 
-        entitysystem = self.world.get_system(EntitySystem)
         for i in self.walls:
-            entitysystem.add_entity(i)
-        entitysystem.add_entity(self.ground)
+            self.entitysystem.add_entity(i)
+        self.entitysystem.add_entity(self.ground)
         for i in self.ennemies:
-            entitysystem.add_entity(i)
-        entitysystem.add_entity(self.flammy)
+            self.entitysystem.add_entity(i)
+        self.entitysystem.add_entity(self.flammy)
+
+        lifebarback = Image([100, 0], "Images/Barres/BarredeVieF.png")
+        self.lifebarfront = Image([100, 0], "Images/Barres/BarredeVie.png")
+        lifeo2back = Image([608, 100], "Images/Barres/BarredeO2F.png")
+        self.lifeo2front = Image([608, 100], "Images/Barres/BarredeO2.png")
+
+        self.uisystem.add_widget(lifebarback)
+        self.uisystem.add_widget(lifeo2back)
+        self.uisystem.add_widget(self.lifebarfront)
+        self.uisystem.add_widget(self.lifeo2front)
 
 
 

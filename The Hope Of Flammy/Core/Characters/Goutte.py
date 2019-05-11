@@ -8,10 +8,17 @@ class Goutte(Entity):
 
         self.game = game
 
-        self.add_component(PositionComponent([150, 150]))
+        self.attack = 50
+
+        self.add_component(PositionComponent([500, 400]))
         self.add_component(SpriteComponent("Images/Ennemi/Goutte.png"))
-        self.add_component(PhysicsComponent(False))
-        self.add_component(MoveComponent([0, 0], 2))
+        phys = self.add_component(PhysicsComponent(False))
+        phys.set_callback(self.collision)
+        self.add_component(MoveComponent([0, 0], 1))
+
+    def collision(self, obj, cause):
+        if obj == self.game.flammy:
+            self.game.flammy.collision(self, cause)
 
     def update(self):
         super(Goutte, self).update()
