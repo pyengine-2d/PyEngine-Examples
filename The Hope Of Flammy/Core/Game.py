@@ -6,6 +6,7 @@ from Core.Characters.Flammy import Flammy
 from Core.Characters.Goutte import Goutte
 from Core.Objects.Wall import Wall
 from Core.Objects.Ground import Ground
+from Core.Objects.Door import Door
 
 
 class Game(GameState):
@@ -14,6 +15,8 @@ class Game(GameState):
 
         self.entitysystem = self.world.get_system(EntitySystem)
         self.uisystem = self.world.get_system(UISystem)
+        self.nblevel = 1
+        self.level = 1
 
         self.flammy = Flammy(self)
         self.walls = [Wall(0), Wall(1), Wall(2), Wall(3)]
@@ -44,5 +47,9 @@ class Game(GameState):
             self.window.set_current_state("Win")
         else:
             self.level += 1
+
+    def loose(self):
+        self.window.set_current_state("Loose")
+
 
 
