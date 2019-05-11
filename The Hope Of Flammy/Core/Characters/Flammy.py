@@ -26,6 +26,14 @@ class Flammy(Entity):
             life.update_life(life.life - obj.attack)
             self.game.entitysystem.entities.remove(obj)
             del self.game.ennemies[self.game.ennemies.index(obj)]
+            if len(self.game.ennemies) == 0:
+                self.game.door.open_door()
+        if obj in self.game.walls:
+            posj = self.get_component(PositionComponent).get_position()
+            posp = self.game.door.get_component(PositionComponent).get_position()
+            if posj[0] + 25 >= posp[0] and posj[0] <= posp[0]+32:
+                if not self.game.door.close:
+                    self.game.next_level()
 
     def update(self):
         super(Flammy, self).update()

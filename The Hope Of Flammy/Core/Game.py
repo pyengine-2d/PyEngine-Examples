@@ -17,12 +17,14 @@ class Game(GameState):
 
         self.flammy = Flammy(self)
         self.walls = [Wall(0), Wall(1), Wall(2), Wall(3)]
+        self.door = Door()
         self.ennemies = [Goutte(self)]
         self.ground = Ground()
 
         for i in self.walls:
             self.entitysystem.add_entity(i)
         self.entitysystem.add_entity(self.ground)
+        self.entitysystem.add_entity(self.door)
         for i in self.ennemies:
             self.entitysystem.add_entity(i)
         self.entitysystem.add_entity(self.flammy)
@@ -37,5 +39,10 @@ class Game(GameState):
         self.uisystem.add_widget(self.lifebarfront)
         self.uisystem.add_widget(self.lifeo2front)
 
+    def next_level(self):
+        if self.level == self.nblevel:
+            self.window.set_current_state("Win")
+        else:
+            self.level += 1
 
 
