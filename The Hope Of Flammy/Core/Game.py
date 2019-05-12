@@ -3,7 +3,6 @@ from pyengine.Systems import EntitySystem, UISystem
 from pyengine.Widgets import Image
 
 from Core.Characters.Flammy import Flammy
-from Core.Characters.Goutte import Goutte
 from Core.Objects.Wall import Wall
 from Core.Objects.Rock import Rock
 from Core.Objects.Ground import Ground
@@ -24,12 +23,14 @@ class Game(GameState):
         self.flammy = Flammy(self)
         self.walls = [Wall(0), Wall(1), Wall(2), Wall(3)]
         self.door = Door()
-        self.ennemies = [Goutte(self)]
         self.ground = Ground()
         self.rocks = []
         posr = gen_pos(10)
         for i in posr:
             self.rocks.append(Rock(i))
+        self.ennemies = []
+        for i in gen_ennemies(posr, 5*self.level, self):
+            self.ennemies.append(i)
 
         for i in self.walls:
             self.entitysystem.add_entity(i)
