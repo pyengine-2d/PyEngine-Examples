@@ -5,8 +5,11 @@ from pyengine.Widgets import Image
 from Core.Characters.Flammy import Flammy
 from Core.Characters.Goutte import Goutte
 from Core.Objects.Wall import Wall
+from Core.Objects.Rock import Rock
 from Core.Objects.Ground import Ground
 from Core.Objects.Door import Door
+
+from Core.Utils import gen_pos, gen_ennemies
 
 
 class Game(GameState):
@@ -23,10 +26,16 @@ class Game(GameState):
         self.door = Door()
         self.ennemies = [Goutte(self)]
         self.ground = Ground()
+        self.rocks = []
+        posr = gen_pos(10)
+        for i in posr:
+            self.rocks.append(Rock(i))
 
         for i in self.walls:
             self.entitysystem.add_entity(i)
         self.entitysystem.add_entity(self.ground)
+        for i in self.rocks:
+            self.entitysystem.add_entity(i)
         self.entitysystem.add_entity(self.door)
         for i in self.ennemies:
             self.entitysystem.add_entity(i)
