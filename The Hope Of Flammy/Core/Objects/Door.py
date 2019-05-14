@@ -16,3 +16,7 @@ class Door(Entity):
     def open_door(self):
         self.get_component(SpriteComponent).set_sprite("Images/Decor/PorteO.png")
         self.close = False
+
+    def close_door(self):
+        self.get_component(SpriteComponent).set_sprite("Images/Decor/PorteF.png")
+        self.close = True

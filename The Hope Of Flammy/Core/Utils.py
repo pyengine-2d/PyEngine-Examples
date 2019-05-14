@@ -2,6 +2,8 @@ from random import randint
 from pyengine.Components import PositionComponent
 
 from Core.Characters.Goutte import Goutte
+from Core.Characters.Biggoutte import Biggoutte
+from Core.Characters.Bougie import Bougie
 
 
 def gen_pos(nb):
@@ -23,9 +25,15 @@ def gen_ennemies(posr, score, game):
     ennemies = []
     while score:
         monster = None
-        if score >= 5:
+        if score >= 8:
+            monster = Biggoutte(game)
+            score -= 8
+        elif score >= 5:
             monster = Goutte(game)
             score -= 5
+        elif score >= 2:
+            monster = Bougie(game)
+            score -= 2
         else:
             score = 0
         if monster:
