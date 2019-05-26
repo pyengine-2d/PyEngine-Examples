@@ -1,7 +1,5 @@
-from pyengine import Window, GameState, Entity
+from pyengine import Window, GameState, Entity, const, Controls, ControlType, StateCallbacks
 from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, MoveComponent, ControlComponent
-from pyengine.Enums import ControlType, Controls, WorldCallbacks
-from pyengine.Components.ControlComponent import const
 from pyengine.Systems import EntitySystem
 
 
@@ -14,10 +12,7 @@ class Jeu:
         # Création et ajout de la GameState du jeu
         self.game = GameState("GAME")
         self.window.add_state(self.game)
-
-        # Récupération du monde pour y ajouter le callback OUTOFWINDOW
-        self.world = self.game.get_world()
-        self.world.set_callback(WorldCallbacks.OUTOFWINDOW, self.outofwindow)
+        self.game.set_callback(StateCallbacks.OUTOFWINDOW, self.outofwindow)
 
         # Création de l'entité pour la barre du joueur à gauche avec :
         #  - Un PositionComponent avec les positions 10, 175
@@ -61,7 +56,7 @@ class Jeu:
         self.ball.add_component(MoveComponent([1, 1]))
 
         # Ajout des entités au monde via l'EntitySystem
-        entitysystem = self.world.get_system(EntitySystem)
+        entitysystem = self.game.get_system(EntitySystem)
         entitysystem.add_entity(self.j1)
         entitysystem.add_entity(self.j2)
         entitysystem.add_entity(self.ball)

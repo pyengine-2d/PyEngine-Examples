@@ -1,5 +1,5 @@
 from pyengine import Entity
-from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, LifeBarComponent
+from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, LifeComponent
 
 from Core.Components.FlammyControlComponent import FlammyControlComponent
 
@@ -22,11 +22,11 @@ class Flammy(Entity):
         self.add_component(FlammyControlComponent())
         phys = self.add_component(PhysicsComponent(False))
         phys.set_callback(self.collision)
-        self.add_component(LifeBarComponent(400))
+        self.add_component(LifeComponent(400))
 
     def collision(self, obj, cause):
         if obj in self.game.ennemies:
-            life = self.get_component(LifeBarComponent)
+            life = self.get_component(LifeComponent)
             life.update_life(life.life - obj.attack)
             self.game.entitysystem.entities.remove(obj)
             del self.game.ennemies[self.game.ennemies.index(obj)]
@@ -47,9 +47,9 @@ class Flammy(Entity):
     def update(self):
         super(Flammy, self).update()
 
-        life = self.get_component(LifeBarComponent)
-        self.game.lifebarfront.set_size([life.life, 32])
-        if life.life == 0:
+        life = self.get_component(LifeComponent)
+        self.game.lifebarfront.set_size([life.get_life(), 32])
+        if life.get_life() == 0:
             self.game.loose()
 
         if self.o2timer <= 0 < self.o2:

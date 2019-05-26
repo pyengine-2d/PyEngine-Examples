@@ -18,8 +18,8 @@ class Game(GameState):
     def __init__(self):
         super(Game, self).__init__("Jeu")
 
-        self.entitysystem = self.world.get_system(EntitySystem)
-        self.uisystem = self.world.get_system(UISystem)
+        self.entitysystem = self.get_system(EntitySystem)
+        self.uisystem = self.get_system(UISystem)
         self.nblevel = 10
         self.level = 1
 

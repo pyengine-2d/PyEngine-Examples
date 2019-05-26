@@ -1,6 +1,7 @@
 from pyengine import Window, GameState
 from pyengine.Systems import UISystem
 from pyengine.Widgets import Label, Button
+from pyengine.Utils import Color, Font
 
 
 class Menu:
@@ -15,20 +16,16 @@ class Menu:
         self.window.add_state(self.gamestate)
         self.window.add_state(self.menustate)
 
-        # Récupération des deux mondes des GameState
-        self.worldmenu = self.menustate.get_world()
-        self.worldgame = self.gamestate.get_world()
-
         # Création du jeu :
         #  - Un label "JEU" en 10, 10 de couleur noire et écrit en arial 18
         #  - Un bouton "Retour" en 10, 100 qui retourne au menu
         #  - Un bouton "Quitter" en 150, 100 qui quitte le jeu
-        self.labeljeu = Label([10, 10], "JEU", (0, 0, 0), ["arial", 18])
+        self.labeljeu = Label([10, 10], "JEU", Color(0, 0, 0), Font("arial", 18))
         self.button1jeu = Button([10, 100], "Retour", self.menu)
         self.button2jeu = Button([150, 100], "Quitter", self.quitter)
 
         # Récupération de l'UISystem du monde du jeu et ajout des widgets
-        self.uisystemjeu = self.worldgame.get_system(UISystem)
+        self.uisystemjeu = self.gamestate.get_system(UISystem)
         self.uisystemjeu.add_widget(self.labeljeu)
         self.uisystemjeu.add_widget(self.button1jeu)
         self.uisystemjeu.add_widget(self.button2jeu)
@@ -37,12 +34,12 @@ class Menu:
         #  - Un label "Menu" en 10, 10 de couleur noire et écrit en arial 18 gras
         #  - Un bouton "Jouer" en 10, 100 qui va au jeu
         #  - Un bouton "Quitter" en 150, 100 qui quitte le jeu
-        self.labelmenu = Label([10, 10], "MENU", (0, 0, 0), ["arial", 18, True])
+        self.labelmenu = Label([10, 10], "MENU", Color(0, 0, 0), Font("arial", 18, True))
         self.button1menu = Button([10, 50], "Jouer", self.jouer)
         self.button2menu = Button([150, 50], "Quitter", self.quitter)
 
         # Récupération de l'UISystem du monde du menu et ajout des widgets
-        self.uisystemmenu = self.worldmenu.get_system(UISystem)
+        self.uisystemmenu = self.menustate.get_system(UISystem)
         self.uisystemmenu.add_widget(self.labelmenu)
         self.uisystemmenu.add_widget(self.button1menu)
         self.uisystemmenu.add_widget(self.button2menu)

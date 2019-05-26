@@ -1,6 +1,5 @@
 from pyengine.Components import ControlComponent, SpriteComponent, PositionComponent
-from pyengine.Enums import ControlType, Controls
-from pyengine import const
+from pyengine import const, ControlType, Controls
 
 from Core.Others.FireShoot import FireShoot
 
