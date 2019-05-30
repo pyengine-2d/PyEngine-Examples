@@ -13,16 +13,16 @@ class FireShoot(Entity):
 
         if direction == [1, 0]:
             self.add_component(PositionComponent([position[0]+30, position[1]+12]))
-            self.add_component(SpriteComponent("Images/Tirs/TirD.png"))
+            self.add_component(SpriteComponent("Images/Flammy/Tir.png", 1, 270))
         elif direction == [-1, 0]:
             self.add_component(PositionComponent([position[0]-20, position[1]+12]))
-            self.add_component(SpriteComponent("Images/Tirs/TirG.png"))
+            self.add_component(SpriteComponent("Images/Flammy/Tir.png", 1, 90))
         elif direction == [0, 1]:
             self.add_component(PositionComponent([position[0]+6, position[1]+40]))
-            self.add_component(SpriteComponent("Images/Tirs/TirB.png"))
+            self.add_component(SpriteComponent("Images/Flammy/Tir.png", 1, 180))
         elif direction == [0, -1]:
             self.add_component(PositionComponent([position[0]+6, position[1]-20]))
-            self.add_component(SpriteComponent("Images/Tirs/TirH.png"))
+            self.add_component(SpriteComponent("Images/Flammy/Tir.png"))
         phys = self.add_component(PhysicsComponent(False))
         phys.set_callback(self.collision)
         self.add_component(MoveComponent(direction))

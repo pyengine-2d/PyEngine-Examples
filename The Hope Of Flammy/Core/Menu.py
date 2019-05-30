@@ -1,14 +1,14 @@
 from pyengine import GameState
 from pyengine.Systems import UISystem
 from pyengine.Widgets import Label, Button
-from pyengine.Utils import Color, Font
+from pyengine.Utils import Colors, Font
 
 
 class Menu(GameState):
     def __init__(self):
         super(Menu, self).__init__("Menu")
 
-        self.title = Label([0, 0], "The Hope Of Flammy", Color(0, 0, 0), Font("arial", 35))
+        self.title = Label([0, 0], "The Hope Of Flammy", Colors.BLACK.value, Font("arial", 35))
         self.play = Button([170, 150], "Jouer", self.launch_game, [300, 100])
         self.quit = Button([170, 300], "Quitter", self.quit_game, [300, 100])
 

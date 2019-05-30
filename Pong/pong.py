@@ -1,12 +1,13 @@
 from pyengine import Window, GameState, Entity, const, Controls, ControlType, StateCallbacks
 from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, MoveComponent, ControlComponent
 from pyengine.Systems import EntitySystem
+from pyengine.Utils import Colors
 
 
 class Jeu:
     def __init__(self):
         # Création de la fenêtre de jeu de taille 800x400, de fond blanc et titre "Pong"
-        self.window = Window(800, 400, (255, 255, 255))
+        self.window = Window(800, 400, Colors.WHITE.value)
         self.window.set_title("Pong")
 
         # Création et ajout de la GameState du jeu
