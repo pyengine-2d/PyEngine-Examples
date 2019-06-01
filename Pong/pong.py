@@ -82,7 +82,7 @@ class Jeu:
             if pos[1] <= 0:
                 position.set_position([10, 0])
             else:
-                position.set_position([10, 400])
+                position.set_position([10, 350])
 
         # Si notre objet est le joueur 2
         elif obj == self.j2:
@@ -91,7 +91,7 @@ class Jeu:
             if pos[1] <= 0:
                 position.set_position([770, 0])
             else:
-                position.set_position([770, 400])
+                position.set_position([770, 350])
 
         # Si notre objet est la balle
         else:
