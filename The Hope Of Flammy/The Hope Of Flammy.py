@@ -6,18 +6,18 @@ from Core.Game import Game
 from Core.Win import Win
 from Core.Loose import Loose
 
-window = Window(640, 480, Colors.WHITE.value)
-window.set_title("The Hope Of Flammy")
 
-menu = Menu()
-jeu = Game()
-win = Win()
-loose = Loose()
+class Main:
+    def __init__(self):
+        self.window = Window(640, 480, Colors.WHITE.value)
+        self.window.title = "The Hope Of Flammy"
 
-window.add_state(jeu)
-window.add_state(menu)
-window.add_state(win)
-window.add_state(loose)
+        self.menu = Menu(self)
+        self.jeu = Game(self)
+        self.win = Win(self)
+        self.loose = Loose(self)
 
-window.set_current_state("Menu")
-window.run()
+        self.window.world = self.menu
+        self.window.run()
+
+Main()

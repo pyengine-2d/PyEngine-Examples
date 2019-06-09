@@ -1,18 +1,18 @@
-from pyengine import GameState
+from pyengine import World
 from pyengine.Systems import UISystem
 from pyengine.Widgets import Label
-from pyengine.Utils import Font, Colors
+from pyengine.Utils import Font, Colors, Vec2
 
 
-class Win(GameState):
-    def __init__(self):
-        super(Win, self).__init__("Win")
+class Win(World):
+    def __init__(self, game):
+        super(Win, self).__init__(game.window)
 
-        l1 = Label([0, 0], "Bravo", Colors.BLACK.value, Font("arial", 30))
-        l2 = Label([0, 0], "Vous avez gagnez !", Colors.BLACK.value, Font("arial", 30))
+        l1 = Label(Vec2(0, 0), "Bravo", Colors.BLACK.value, Font("arial", 30))
+        l2 = Label(Vec2(0, 0), "Vous avez gagnez !", Colors.BLACK.value, Font("arial", 30))
 
-        l1.set_position([320 - l1.rect.width / 2, 190])
-        l2.set_position([320 - l2.rect.width / 2, 230])
+        l1.position = Vec2(320 - l1.rect.width / 2, 190)
+        l2.position = Vec2(320 - l2.rect.width / 2, 230)
 
         uisystem = self.get_system(UISystem)
         uisystem.add_widget(l1)

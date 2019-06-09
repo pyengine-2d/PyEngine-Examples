@@ -1,7 +1,8 @@
-from pyengine import GameState
+from pyengine import World
 from pyengine.Systems import EntitySystem, UISystem
 from pyengine.Widgets import Image
 from pyengine.Components import PositionComponent
+from pyengine.Utils import Vec2
 
 from random import randint
 
@@ -14,9 +15,11 @@ from Core.Objects.Door import Door
 from Core.Utils import gen_pos, gen_ennemies
 
 
-class Game(GameState):
-    def __init__(self):
-        super(Game, self).__init__("Jeu")
+class Game(World):
+    def __init__(self, game):
+        super(Game, self).__init__(game.window)
+
+        self.game = game
 
         self.entitysystem = self.get_system(EntitySystem)
         self.uisystem = self.get_system(UISystem)
@@ -30,10 +33,10 @@ class Game(GameState):
         self.rocks = []
         self.ennemies = []
 
-        lifebarback = Image([100, 0], "Images/Barres/BarredeVieF.png")
-        self.lifebarfront = Image([100, 0], "Images/Barres/BarredeVie.png")
-        lifeo2back = Image([608, 100], "Images/Barres/BarredeO2F.png")
-        self.lifeo2front = Image([608, 100], "Images/Barres/BarredeO2.png")
+        lifebarback = Image(Vec2(100, 0), "Images/Barres/BarredeVieF.png")
+        self.lifebarfront = Image(Vec2(100, 0), "Images/Barres/BarredeVie.png")
+        lifeo2back = Image(Vec2(608, 100), "Images/Barres/BarredeO2F.png")
+        self.lifeo2front = Image(Vec2(608, 100), "Images/Barres/BarredeO2.png")
 
         for i in self.walls:
             self.entitysystem.add_entity(i)
@@ -53,10 +56,10 @@ class Game(GameState):
         for i in self.ennemies:
             self.entitysystem.entities.remove(i)
 
-        self.flammy.get_component(PositionComponent).set_position([32, 32])
+        self.flammy.get_component(PositionComponent).position = Vec2(32, 32)
         self.flammy.o2 = 300
-        self.lifeo2front.set_size([32, 300])
-        self.lifeo2front.set_position([608, 100])
+        self.lifeo2front.size = [32, 300]
+        self.lifeo2front.position = Vec2(608, 100)
         self.door.close_door()
 
         self.rocks = []
@@ -73,13 +76,13 @@ class Game(GameState):
 
     def next_level(self):
         if self.level == self.nblevel:
-            self.window.set_current_state("Win")
+            self.window.world = self.game.win
         else:
             self.level += 1
             self.create_level(self.level)
 
     def loose(self):
-        self.window.set_current_state("Loose")
+        self.window.world = self.game.loose
 
 
 

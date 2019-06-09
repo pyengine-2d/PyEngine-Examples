@@ -1,5 +1,6 @@
 from pyengine import Entity
 from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, MoveComponent
+from pyengine.Utils import Vec2
 
 
 class Goutte(Entity):
@@ -10,11 +11,11 @@ class Goutte(Entity):
 
         self.attack = 50
 
-        self.add_component(PositionComponent([500, 400]))
+        self.add_component(PositionComponent(Vec2(500, 400)))
         self.add_component(SpriteComponent("Images/Ennemi/Goutte.png"))
         phys = self.add_component(PhysicsComponent(False))
-        phys.set_callback(self.collision)
-        self.add_component(MoveComponent([0, 0], 1))
+        phys.callback = self.collision
+        self.add_component(MoveComponent(Vec2(0, 0)))
 
     def collision(self, obj, cause):
         if obj == self.game.flammy:
@@ -22,15 +23,15 @@ class Goutte(Entity):
 
     def update(self):
         super(Goutte, self).update()
-        posj = self.game.flammy.get_component(PositionComponent).get_position()
-        pos = self.get_component(PositionComponent).get_position()
-        direction = [0, 0]
-        if posj[0] < pos[0]:
-            direction[0] = -1
-        elif posj[0] > pos[0]:
-            direction[0] = 1
-        if posj[1] < pos[1]:
-            direction[1] = -1
-        elif posj[1] > pos[1]:
-            direction[1] = 1
-        self.get_component(MoveComponent).set_direction(direction)
+        posj = self.game.flammy.get_component(PositionComponent).position
+        pos = self.get_component(PositionComponent).position
+        direction = Vec2()
+        if posj.x < pos.x:
+            direction.x = -1
+        elif posj.x > pos.x:
+            direction.x = 1
+        if posj.y < pos.y:
+            direction.y = -1
+        elif posj.y > pos.y:
+            direction.y = 1
+        self.get_component(MoveComponent).direction = direction

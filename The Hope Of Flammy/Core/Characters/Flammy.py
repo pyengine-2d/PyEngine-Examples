@@ -1,5 +1,6 @@
 from pyengine import Entity
 from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, LifeComponent
+from pyengine.Utils import Vec2
 
 from Core.Components.FlammyControlComponent import FlammyControlComponent
 
@@ -17,30 +18,30 @@ class Flammy(Entity):
         self.o2 = 300
         self.o2timer = 8
 
-        self.add_component(PositionComponent([32, 32]))
+        self.add_component(PositionComponent(Vec2(32, 32)))
         self.add_component(SpriteComponent("Images/Flammy/Flammy.png"))
         self.add_component(FlammyControlComponent())
         phys = self.add_component(PhysicsComponent(False))
-        phys.set_callback(self.collision)
+        phys.callback = self.collision
         self.add_component(LifeComponent(400))
 
     def collision(self, obj, cause):
         if obj in self.game.ennemies:
             life = self.get_component(LifeComponent)
-            life.update_life(life.life - obj.attack)
+            life.life = life.life - obj.attack
             self.game.entitysystem.entities.remove(obj)
             del self.game.ennemies[self.game.ennemies.index(obj)]
             if type(obj) == Biggoutte:
                 g = Goutte(self.game)
-                g.get_component(PositionComponent).set_position(obj.get_component(PositionComponent).get_position())
+                g.get_component(PositionComponent).position = obj.get_component(PositionComponent).position
                 self.game.entitysystem.add_entity(g)
                 self.game.ennemies.append(g)
             if len(self.game.ennemies) == 0:
                 self.game.door.open_door()
         if obj in self.game.walls:
-            posj = self.get_component(PositionComponent).get_position()
-            posp = self.game.door.get_component(PositionComponent).get_position()
-            if posj[0] + 25 >= posp[0] and posj[0] <= posp[0]+32:
+            posj = self.get_component(PositionComponent).position
+            posp = self.game.door.get_component(PositionComponent).position
+            if posj.x + 25 >= posp.x and posj.x <= posp.x+32:
                 if not self.game.door.close:
                     self.game.next_level()
 
@@ -48,8 +49,8 @@ class Flammy(Entity):
         super(Flammy, self).update()
 
         life = self.get_component(LifeComponent)
-        self.game.lifebarfront.set_size([life.get_life(), 32])
-        if life.get_life() == 0:
+        self.game.lifebarfront.size = [life.life, 32]
+        if life.life == 0:
             self.game.loose()
 
         if self.o2timer <= 0 < self.o2:
@@ -58,8 +59,8 @@ class Flammy(Entity):
                 if type(i) == Bougie:
                     nbb += 1
             self.o2 -= 1 + nbb
-            self.game.lifeo2front.set_size([32, self.o2])
-            self.game.lifeo2front.set_position([608, 100+(300-self.o2)])
+            self.game.lifeo2front.size = [32, self.o2]
+            self.game.lifeo2front.position = Vec2(608, 100+(300-self.o2))
             self.o2timer = 8
             if self.o2 == 0:
                 self.game.loose()
