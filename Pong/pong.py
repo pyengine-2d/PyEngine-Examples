@@ -1,4 +1,4 @@
-from pyengine import Window, Entity, const, Controls, ControlType, WorldCallbacks
+from pyengine import Window, Entity, const, Controls, ControlType, WindowCallbacks
 from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, MoveComponent, ControlComponent
 from pyengine.Systems import EntitySystem
 from pyengine.Utils import Colors, Vec2
@@ -11,8 +11,8 @@ class Jeu:
         self.window = Window(800, 400, Colors.WHITE.value)
         self.window.title = "Pong"
 
-        # Création et ajout de la GameState du jeu
-        self.window.world.set_callback(WorldCallbacks.OUTOFWINDOW, self.outofwindow)
+        # Définition du callback OUTOFWINDOW
+        self.window.set_callback(WindowCallbacks.OUTOFWINDOW, self.outofwindow)
 
         # Création de l'entité pour la barre du joueur à gauche avec :
         #  - Un PositionComponent avec les positions 10, 175

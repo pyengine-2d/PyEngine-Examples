@@ -27,7 +27,7 @@ class FlammyControlComponent(ControlComponent):
             sprite.sprite = "Images/Flammy/FlammyD.png"
             self.vers = Vec2(1, 0)
         elif evt.key == const.K_SPACE and self.shoottimer <= 0:
-            shoot = FireShoot(self.vers, self.entity.get_component(PositionComponent).get_position(),
+            shoot = FireShoot(self.vers, self.entity.get_component(PositionComponent).position,
                               self.entity.game)
             self.entity.system.add_entity(shoot)
             self.shoottimer = 10
