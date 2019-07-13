@@ -47,17 +47,17 @@ class Menu:
         self.window.run()
 
     # Fonction allant sur le menu
-    def menu(self, widget, button):
+    def menu(self):
         # Définition du World actuel à celui du menu
         self.window.world = self.mworld
 
     # Fonction allant sur le jeu
-    def jouer(self, widget, button):
+    def jouer(self):
         # Définition du World actuel à celui du jeu
         self.window.world = self.gworld
 
     # Fonction quittant la fenêtre
-    def quitter(self, widget, button):
+    def quitter(self):
         # Ferme la fenêtre
         self.window.stop()
 

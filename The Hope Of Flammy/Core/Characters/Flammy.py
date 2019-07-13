@@ -49,7 +49,7 @@ class Flammy(Entity):
         super(Flammy, self).update()
 
         life = self.get_component(LifeComponent)
-        self.game.lifebarfront.size = [life.life, 32]
+        self.game.lifebarfront.size = Vec2(life.life, 32)
         if life.life == 0:
             self.game.loose()
 
@@ -59,7 +59,7 @@ class Flammy(Entity):
                 if type(i) == Bougie:
                     nbb += 1
             self.o2 -= 1 + nbb
-            self.game.lifeo2front.size = [32, self.o2]
+            self.game.lifeo2front.size = Vec2(32, self.o2)
             self.game.lifeo2front.position = Vec2(608, 100+(300-self.o2))
             self.o2timer = 8
             if self.o2 == 0:

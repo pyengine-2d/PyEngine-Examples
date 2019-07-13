@@ -58,7 +58,7 @@ class Game(World):
 
         self.flammy.get_component(PositionComponent).position = Vec2(32, 32)
         self.flammy.o2 = 300
-        self.lifeo2front.size = [32, 300]
+        self.lifeo2front.size = Vec2(32, 300)
         self.lifeo2front.position = Vec2(608, 100)
         self.door.close_door()
 

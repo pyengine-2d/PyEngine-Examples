@@ -10,8 +10,8 @@ class Menu(World):
 
         self.game = game
         self.title = Label(Vec2(0, 0), "The Hope Of Flammy", Colors.BLACK.value, Font("arial", 35))
-        self.play = Button(Vec2(170, 150), "Jouer", self.launch_game, (300, 100))
-        self.quit = Button(Vec2(170, 300), "Quitter", self.quit_game, (300, 100))
+        self.play = Button(Vec2(170, 150), "Jouer", self.launch_game, Vec2(300, 100))
+        self.quit = Button(Vec2(170, 300), "Quitter", self.quit_game, Vec2(300, 100))
 
         self.title.position = Vec2(320 - self.title.rect.width/2, 50)
         self.play.label.font = Font("arial", 30)
@@ -22,8 +22,8 @@ class Menu(World):
         uisystem.add_widget(self.quit)
         uisystem.add_widget(self.play)
 
-    def quit_game(self, button, click):
+    def quit_game(self):
         self.window.stop()
 
-    def launch_game(self, button, click):
+    def launch_game(self):
         self.window.world = self.game.jeu
