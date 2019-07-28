@@ -11,22 +11,23 @@ class FlammyControlComponent(ControlComponent):
         self.vers = Vec2(0, 1)
         self.shoottimer = 0
 
-    def keypress(self, evt):
-        super(FlammyControlComponent, self).keypress(evt)
+    def movebykey(self, eventkey):
+        print(eventkey)
+        super(FlammyControlComponent, self).movebykey(eventkey)
         sprite = self.entity.get_component(SpriteComponent)
-        if evt.key == self.controles[Controls.UPJUMP]:
+        if eventkey == self.controles[Controls.UPJUMP]:
             sprite.sprite = "Images/Flammy/FlammyH.png"
             self.vers = Vec2(0, -1)
-        elif evt.key == self.controles[Controls.LEFT]:
+        elif eventkey == self.controles[Controls.LEFT]:
             sprite.sprite = "Images/Flammy/FlammyG.png"
             self.vers = Vec2(-1, 0)
-        elif evt.key == self.controles[Controls.DOWN]:
+        elif eventkey == self.controles[Controls.DOWN]:
             sprite.sprite = "Images/Flammy/Flammy.png"
             self.vers = Vec2(0, 1)
-        elif evt.key == self.controles[Controls.RIGHT]:
+        elif eventkey == self.controles[Controls.RIGHT]:
             sprite.sprite = "Images/Flammy/FlammyD.png"
             self.vers = Vec2(1, 0)
-        elif evt.key == const.K_SPACE and self.shoottimer <= 0:
+        elif eventkey == const.K_SPACE and self.shoottimer <= 0:
             shoot = FireShoot(self.vers, self.entity.get_component(PositionComponent).position,
                               self.entity.game)
             self.entity.system.add_entity(shoot)

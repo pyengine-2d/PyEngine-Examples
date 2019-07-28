@@ -1,4 +1,5 @@
-from pyengine import Window, Entity, const, Controls, ControlType, WindowCallbacks
+from pyengine import Window, const, Controls, ControlType, WindowCallbacks
+from pyengine.Entities import Entity
 from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, MoveComponent, ControlComponent
 from pyengine.Systems import EntitySystem
 from pyengine.Utils import Colors, Vec2

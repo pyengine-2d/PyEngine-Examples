@@ -1,4 +1,4 @@
-from pyengine import Entity
+from pyengine.Entities import Entity
 from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, MoveComponent
 from Core.Characters.Biggoutte import Biggoutte
 from Core.Characters.Goutte import Goutte

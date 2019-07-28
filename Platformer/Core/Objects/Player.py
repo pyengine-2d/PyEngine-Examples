@@ -1,4 +1,5 @@
-from pyengine import Entity, ControlType
+from pyengine import ControlType
+from pyengine.Entities import Entity
 from pyengine.Components import PositionComponent, SpriteComponent, PhysicsComponent, ControlComponent
 
 

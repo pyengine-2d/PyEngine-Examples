@@ -1,4 +1,4 @@
-from pyengine import Entity
+from pyengine.Entities import Entity
 from pyengine.Components import PositionComponent, SpriteComponent
 from pyengine.Utils import Vec2
 
