@@ -19,8 +19,9 @@ class Player(Entity):
     def set_pos(self, pos):
         self.get_component(PositionComponent).position = pos
 
-    def collision(self, e, cinfos):
-        if e.get_component(SpriteComponent).sprite == "Assets/Tiles/Chest.png":
-            self.game.end_level()
-        elif e.get_component(SpriteComponent).sprite == "Assets/Obstacles/Saw.png":
-            self.game.loose()
+    def collision(self, entity, others, space, data):
+        for e in others:
+            if e.get_component(SpriteComponent).sprite == "Assets/Tiles/Chest.png":
+                self.game.end_level()
+            elif e.get_component(SpriteComponent).sprite == "Assets/Obstacles/Saw.png":
+                self.game.loose()

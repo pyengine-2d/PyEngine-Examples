@@ -54,7 +54,7 @@ class Jeu:
         spriteballe.size = Vec2(20, 20)
         physball = self.ball.add_component(PhysicsComponent(False))
         physball.callback = self.collision
-        self.ball.add_component(MoveComponent(Vec2(randint(1, 5), randint(1, 5))))
+        self.ball.add_component(MoveComponent(Vec2(randint(20, 60), randint(20, 60))))
 
         # Ajout des entités au monde via l'EntitySystem
         entitysystem = self.window.world.get_system(EntitySystem)
